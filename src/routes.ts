@@ -59,7 +59,7 @@ router.post('/api/chat', chatController.sendMessage);
 /**
  * @swagger
  * /api/conversations:
- *  get:
+ *  post:
  *    tags: [Chat]
  *    summary: Get user wise conversations
  *    requestBody:
