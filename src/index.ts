@@ -9,7 +9,7 @@ import router from "./routes"
 
 const app = express();
 app.use(cors({
-  origin: true,
+  origin: process.env.FRONT_URL,
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
