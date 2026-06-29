@@ -1,5 +1,6 @@
 import express from "express";
 import type { Request, Response, NextFunction } from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 // console.log("INDEX.TS IS RUNNING");
@@ -7,16 +8,14 @@ dotenv.config();
 import router from "./routes"
 
 const app = express();
+app.use(cors({
+  origin: true,
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+}));
+app.options("*", cors());
 app.use(express.json()); // Middleware to parse JSON bodies
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-  next();
-});
 app.use(router);
 app.use((req: Request, res: Response) => {
   if (req.path.startsWith("/api/")) {
