@@ -14,7 +14,6 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 }));
-app.options("*", cors());
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(router);
 app.use((req: Request, res: Response) => {
