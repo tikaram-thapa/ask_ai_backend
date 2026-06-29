@@ -51,7 +51,7 @@ export const chatService = {
         };
     },
     async getUserConversations(userId: string): Promise<{ id: string; message: string }[]> {
-        // console.log("Getting conversations...", conversationsList);
+        // console.log("Getting conversations...", userMemory);
         const userConversations = userMemory.get(userId);
         if (!userConversations) {
             return [];

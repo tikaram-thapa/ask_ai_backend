@@ -24,20 +24,25 @@ export const chatController = {
         }
         try {
             const response = await chatService.sendMessage(userId, prompt, conversationId);
-            res.json({ message: response.message});
+            res.status(200).json({ message: response.message});
         } catch (error) {
             res.status(500).json({ error: "An error occurred while processing your request." });
         }
     },
 
     async getUserConversations (req: Request, res: Response) {
-        const { userId } = req.body;
+        const userId = typeof req.query.userId === 'string'
+            ? req.query.userId
+            : typeof req.body?.userId === 'string'
+                ? req.body.userId
+                : undefined;
+
         if (!userId) {
             return res.status(400).json({ error: "User ID is required" });
         }
         try {
             const conversations = await chatService.getUserConversations(userId);
-            res.json({ conversations });
+            res.status(200).json({ conversations });
         } catch (error) {
             res.status(500).json({ error: "An error occurred while fetching conversations." });
         }
@@ -46,7 +51,7 @@ export const chatController = {
     async getConversationList (req: Request, res: Response) {
         try {
             const conversations = await chatService.getConversations();
-            res.json({ count: conversations.length, conversations });
+            res.status(200).json({ count: conversations.length, conversations });
         } catch (error) {
             res.status(500).json({ error: "An error occurred while fetching conversations." });
         }

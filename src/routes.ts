@@ -76,7 +76,7 @@ router.post('/api/chat', chatController.sendMessage);
  *     200:
  *      description: Success
  */
-router.get('/api/conversations', chatController.getUserConversations);
+router.post('/api/conversations', chatController.getUserConversations);
 
 /**
  * @swagger
