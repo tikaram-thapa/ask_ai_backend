@@ -9,10 +9,9 @@ import router from "./routes"
 
 const app = express();
 app.use(cors({
-  origin: process.env.FRONT_URL,
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
+    origin: "https://main.dr1bvmiuoqfuq.amplifyapp.com",
+    methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+    credentials: true
 }));
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(router);
